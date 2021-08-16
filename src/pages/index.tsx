@@ -1,8 +1,10 @@
-import { Flex, Button, Stack } from '@chakra-ui/react'
+import { Flex, Button, Stack, Tooltip, Icon, Text, HStack } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from '../components/Form/Input'
+import { useRouter } from 'next/router';
+import { RiLightbulbFlashLine } from 'react-icons/ri';
 
 type SignInFormData = {
   email: string;
@@ -15,13 +17,29 @@ const signInFormSchema = yup.object().shape({
 })
 
 export default function SignIn() {
+  const router = useRouter()
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(signInFormSchema)
   });
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log(values);
+    const validCredentials = {
+      email: 'gabriel@email.com',
+      password: '123456'
+    }
+
+    if (values.email.trim() !== validCredentials.email) {
+      alert('E-mail inválido')
+      return
+    }
+
+    if (values.password.trim() !== validCredentials.password) {
+      alert('Senha inválida')
+      return
+    }
+
+    router.push('/dashboard')
   }
 
   return (
@@ -60,13 +78,19 @@ export default function SignIn() {
 
         <Button
           type="submit"
-          mt="6"
+          my="6"
           colorScheme="pink"
           size="lg"
           isLoading={formState.isSubmitting}
         >
           Entrar
         </Button>
+
+        <Tooltip label="gabriel@email.com / 123456" aria-label="A tooltip">
+          <Text align="right" fontSize="smaller">
+            Não passe o mouse por aqui <Icon as={RiLightbulbFlashLine} fontSize="md" />
+          </Text>
+        </Tooltip>
       </Flex>
     </Flex>
   )
