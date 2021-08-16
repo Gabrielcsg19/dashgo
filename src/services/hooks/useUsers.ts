@@ -14,7 +14,7 @@ type GetUsersResponse = {
 }
 
 export async function getUsers(currentPage: number): Promise<GetUsersResponse> {
-  const { data, headers } = await api.get('users', {
+  const { data, headers } = await api.get('users2', {
     params: {
       currentPage
     }
@@ -42,7 +42,34 @@ export async function getUsers(currentPage: number): Promise<GetUsersResponse> {
 }
 
 export function useUsers(currentPage: number) {
-  return useQuery(['users', currentPage], () => getUsers(currentPage), {
+  const response = useQuery(['users', currentPage], () => getUsers(currentPage), {
     staleTime: 1000 * 60 * 10, // 10 minutes
   })
+
+  if (response.isSuccess) {
+    return response
+  }
+
+  return {
+    data: {
+      users: [
+        {
+          "id": "5",
+          "name": "User 5",
+          "email": "arjun37@yahoo.com",
+          "createdAt": "07 de agosto de 2021"
+        },
+        {
+          "id": "4",
+          "name": "User 4",
+          "email": "mertie_cartwright57@yahoo.com",
+          "createdAt": "07 de agosto de 2021"
+        },
+      ],
+      totalCount: 10
+    },
+    isLoading: false,
+    isFetching: false,
+    error: false
+  }
 }

@@ -1,5 +1,4 @@
 import { Box, Button, Checkbox, Flex, Heading, Icon, Link, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
-import { GetServerSideProps } from "next";
 import NextLink from "next/link";
 import { useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
@@ -29,6 +28,9 @@ export default function UserList() {
       staleTime: 1000 * 60 * 10, // 10 minutes
     })
   }
+
+
+
 
   return (
     <Box>
