@@ -1,6 +1,6 @@
 <h1 align="center">dashgo</h1><br>
 
-![dashgo-home](https://user-images.githubusercontent.com/54643425/129553423-8233189d-29d7-4919-99da-c7c9d6e00fc3.png)
+![dashgo-home](https://raw.githubusercontent.com/Gabrielcsg19/dashgo/main/assets/cover-img.png)
 
 ---
 Dashboard baseado em dados servidos pelo __Mirage JS__ e interface criada com __Chakra UI__.
